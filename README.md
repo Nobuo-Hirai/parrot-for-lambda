@@ -4,7 +4,7 @@
 AWS Lambdaで動作するSlack連携アプリ  
 SlackでAppにメンションをつけてメッセージを送信すると同じメッセージを自分宛に返してくれるオウム返しのアプリです。  
 
-### development environment setup
+## development environment setup
 #### rubyのinstall
 ruby 2.5.8をインストールして下さい。
 
@@ -20,7 +20,7 @@ bundle install
 ```
 
 #### Lambdaの環境変数
-Lambdaの環境変数へセットする内容  
+Lambdaの環境変数へセットする内容は以下の通りです。 
 
 | key | value |
 | ---- | ---- |
@@ -29,11 +29,8 @@ Lambdaの環境変数へセットする内容
 | notification_slack_channel | Slackの通知先channel名(#hogehoge のような感じ) |
 | slack_token | Slackのaccess token(Bot User OAuth Access Token) |
 
-
-```
-
 ## Lambdaへdeploy
-### Lambdaへのdeployはソースをzipにしてアップロードします。
+Lambdaへのdeployはソースをzipにしてアップロードします。
 
 ### zip file作成
 ```
