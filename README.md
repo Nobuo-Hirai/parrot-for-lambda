@@ -1,8 +1,8 @@
 # parrot-for-Lambda
 
 ## Description
-AWS Lambdaで動作するSlack連携アプリ  
-SlackでAppにメンションをつけてメッセージを送信すると同じメッセージを自分宛に返してくれるオウム返しのアプリです。  
+AWS Lambdaで動作するSlack連携アプリです。  
+SlackでAppにメンションをつけてメッセージを送信すると同じメッセージを返してくるオウム返しのアプリです。  
 
 ## development environment setup
 #### rubyのinstall
@@ -26,7 +26,6 @@ Lambdaの環境変数へセットする内容は以下の通りです。
 | ---- | ---- |
 | api_app_id | Slackのapi_app_id (SlackのAppページに表示されているApp ID) |
 | channel_id | 呼び出し元のSlack channel id。対象のchannel以外は実行を許可しない(channel idの確認方法は該当のchannelをアプリで選択して、右クリックでリンクをコピーします。それをブラウザへ貼り付け、/archives/以降がidです。) |
-| notification_slack_channel | Slackの通知先channel名(#hogehoge のような感じ) |
 | slack_token | Slackのaccess token(Bot User OAuth Access Token) |
 
 ## Lambdaへdeploy
