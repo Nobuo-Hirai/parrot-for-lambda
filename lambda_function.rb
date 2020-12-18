@@ -19,11 +19,13 @@ def lambda_handler(event:, context:)
   api_app_id = json_body.dig("api_app_id")
 
   # 不正なアクセスはcloudwatchで確認
+  # ※チェック不要な場合はここのif文は削除してください。
   if channel_id != ENV["channel_id"] || api_app_id != ENV["api_app_id"]
     puts "event_data:#{event.inspect}"
     notification_to_slack("意図しないchannelまたはユーザから実行されました。")
     return { statusCode: 200, body: "OK" }
   end
+
   app_user_id = json_body.dig("event", "blocks", 0, "elements", 0, "elements", 0, "user_id")
   user_id = json_body.dig("event", "user")
   text = json_body.dig("event", "text")
@@ -32,7 +34,7 @@ def lambda_handler(event:, context:)
     return { statusCode: 200, body: "OK" }
   else
     message = text.gsub(/#{app_user_id}/, user_id)
-    notification_to_slack(message)
+    notification_to_slack(channel_id, message)
 
     return { statusCode: 200, body: "OK" }
   end
@@ -44,8 +46,8 @@ def retry_header?(event_headers)
   retry_num.present? && (retry_reason == "http_timeout" || retry_reason == "http_error")
 end
 
-def notification_to_slack(message)
-  channel = ENV["channel_id"]
+def notification_to_slack(channel_id = nil, message)
+  channel = channel_id || ENV["channel_id"]
   Slack.configure do |config|
     config.token = ENV["slack_token"]
   end
