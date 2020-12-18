@@ -24,12 +24,16 @@ def lambda_handler(event:, context:)
     notification_to_slack("意図しないchannelまたはユーザから実行されました。")
     return { statusCode: 200, body: "OK" }
   end
+  app_user_id = json_body.dig("event", "blocks", 0, "elements", 0, "elements", 0, "user_id")
+  user_id = json_body.dig("event", "user")
+  text = json_body.dig("event", "text")
 
-  text = json_body.dig("event", "blocks", 0, "elements", 0, "elements", 1, "text")
   if text.blank?
     return { statusCode: 200, body: "OK" }
   else
-    notification_to_slack(text)
+    message = text.gsub(/#{app_user_id}/, user_id)
+    notification_to_slack(message)
+
     return { statusCode: 200, body: "OK" }
   end
 end
