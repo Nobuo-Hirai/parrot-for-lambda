@@ -27,6 +27,7 @@ Lambdaの環境変数へセットする内容は以下の通りです。
 | api_app_id | Slackのapi_app_id (SlackのAppページに表示されているApp ID) |
 | channel_id | 呼び出し元のSlack channel id。対象のchannel以外は実行を許可しない(channel idの確認方法は該当のchannelをアプリで選択して、右クリックでリンクをコピーします。それをブラウザへ貼り付け、/archives/以降がidです。) |
 | slack_token | Slackのaccess token(Bot User OAuth Access Token) |
+
 ※どこのchannelでも使えて良い場合は `channel_id` は不要です。
 
 ## Lambdaへdeploy
